@@ -29,14 +29,14 @@
         private void InitializeComponent()
         {
             this.SuspendLayout();
-            //
+            // 
             // ExForm
-            //
+            // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(284, 262);
             this.Name = "ExForm";
-            this.Text = "ExForm";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.ExForm_FormClosed);
             this.Load += new System.EventHandler(this.ExForm_Load);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.ExForm_Paint);
             this.ResumeLayout(false);

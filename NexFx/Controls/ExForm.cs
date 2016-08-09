@@ -3,6 +3,9 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Windows.Forms;
+using System.IO;
+using System.Reflection;
+using System.Xml.Linq;
 
 namespace NexFx.Controls
 {
@@ -38,6 +41,15 @@ namespace NexFx.Controls
         [DefaultValue(false)]
         [Description("Escキーによる画面終了の有効値を示します。(画面読込時の値のみ有効。)")]
         public bool EnableEscClose { get; set; } = false;
+
+        /// <summary>
+        /// 前回終了時の表示位置を再現します。(画面読込時の値のみ有効。)
+        /// </summary>
+        [Browsable(true)]
+        [Category("動作")]
+        [DefaultValue(false)]
+        [Description("前回終了時の表示位置を再現します。(画面読込時の値のみ有効。)")]
+        public bool DuplicateLastTimePosition { get; set; } = false;
 
         /// <summary>
         /// 拡張コントロールのサービス設定済みフラグを取得します。
@@ -98,6 +110,9 @@ namespace NexFx.Controls
         /// </summary>
         private void ExForm_Load(object sender, EventArgs e)
         {
+            // 画面の表示位置を設定します。
+            this.SetFormPosition();
+
             // Enterキーによるフォーカス遷移の有効値を判定します。
             if (this.EnableEnterTransition)
             {
@@ -169,6 +184,15 @@ namespace NexFx.Controls
         }
 
         /// <summary>
+        /// フォーム終了後の処理を行います。
+        /// </summary>
+        private void ExForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            // 画面位置を保存します。
+            this.SaveFormPosition();
+        }
+
+        /// <summary>
         /// 拡張コントロールをサービスに設定します。
         /// </summary>
        　public void SetExControlService()
@@ -190,6 +214,93 @@ namespace NexFx.Controls
 
             // 拡張コントロールのサービス設定済みフラグを設定します。
             this.DoneSetExControlService = true;
+        }
+
+        // 画面位置設定ファイルのパス。
+        private string _formConfigPath;
+
+        // 画面位置設定ファイルの拡張子。
+        private static readonly string POSITION_CONFIG_EXTENSION = ".positionConfig";
+
+        // トップエレメント。
+        private static readonly string TOP_ELEMENT = "configuration";
+
+        // ポジションエレメント。
+        private static readonly string POSITION_ELEMENT = "position";
+
+        // 左部位置属性。
+        private static readonly string LEFT_ATTRIBUTE = "left";
+
+        // 上部位置属性。
+        private static readonly string TOP_ATTRIBUTE = "top";
+
+        /// <summary>
+        /// 画面位置を設定します。
+        /// </summary>
+        private void SetFormPosition()
+        {
+            // 画面位置設定ファイルのパスを取得します。
+            this._formConfigPath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), this.Name + POSITION_CONFIG_EXTENSION);
+
+            // 前回終了時の表示位置を再現するかを判定します。
+            if (!this.DuplicateLastTimePosition) return;
+
+            // 画面位置設定ファイルが存在しない場合は終了します。
+            if (!File.Exists(this._formConfigPath)) return;
+
+            // 画面位置設定ファイルの読み込みます。
+            var xDoc = XDocument.Load(this._formConfigPath);
+
+            // 画面位置設定ファイルから値を取得します。。
+            var leftString = xDoc.Element(TOP_ELEMENT).Element(POSITION_ELEMENT).Attribute(LEFT_ATTRIBUTE).Value;
+            var topString = xDoc.Element(TOP_ELEMENT).Element(POSITION_ELEMENT).Attribute(TOP_ATTRIBUTE).Value;
+
+            // 位置用の変数。
+            int left, top;
+
+            // 取得した値をキャストします。
+            if (!int.TryParse(leftString, out left) || !int.TryParse(topString, out top)) return;
+
+            // 位置を設定します。
+            this.StartPosition = FormStartPosition.Manual;
+            this.Left = left;
+            this.Top = top;
+        }
+
+        /// <summary>
+        /// 画面位置を保存します。
+        /// </summary>
+        private void SaveFormPosition()
+        {
+            // 前回終了時の表示位置を再現するかを判定します。
+            if (!this.DuplicateLastTimePosition) return;
+
+            // 位置を取得します。
+            var left = this.Left;
+            var top = this.Top;
+
+            // 画面位置設定ファイルが存在を判定します。
+            if (File.Exists(this._formConfigPath))
+            {
+                // 画面位置設定ファイルの読み込みます。
+                var xDoc = XDocument.Load(this._formConfigPath);
+
+                // 画面位置設定ファイルから値を取得します。
+                xDoc.Element(TOP_ELEMENT).Element(POSITION_ELEMENT).Attribute(LEFT_ATTRIBUTE).Value = left.ToString();
+                xDoc.Element(TOP_ELEMENT).Element(POSITION_ELEMENT).Attribute(TOP_ATTRIBUTE).Value = top.ToString();
+
+                // 画面位置設定ファイルを保存します。
+                xDoc.Save(this._formConfigPath);
+            }
+            else
+            {
+                // 画面位置設定ファイルの定義します。
+                var xDoc = new XDocument(new XDeclaration("1.0", "utf-8", "true"),
+                                         new XElement(TOP_ELEMENT, new XElement(POSITION_ELEMENT, new XAttribute(LEFT_ATTRIBUTE, left.ToString()), new XAttribute(TOP_ATTRIBUTE, top.ToString()))));
+
+                // 画面位置設定ファイルを保存します。
+                xDoc.Save(this._formConfigPath);
+            }
         }
     }
 }
