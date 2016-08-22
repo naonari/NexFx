@@ -6,11 +6,11 @@ using System.Runtime.InteropServices;
 // アセンブリに関連付けられている情報を変更するには、
 // これらの属性値を変更してください。
 [assembly: AssemblyTitle("NexFxTest")]
-[assembly: AssemblyDescription("拡張コントロールによるFrameworkのテストプロジェクト")]
+[assembly: AssemblyDescription("拡張コントロールによるFrameworkライブラリのテストプロジェクト")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("GrowupConsultant")]
 [assembly: AssemblyProduct("NexFx")]
-[assembly: AssemblyCopyright("Copyright c GrowupConsultant 2016")]
+[assembly: AssemblyCopyright("Copyright (C) 2016 GrowupConsultant")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
