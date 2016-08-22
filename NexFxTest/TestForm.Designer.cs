@@ -38,9 +38,11 @@
             this.exTextBox1.CaptionControl = null;
             this.exTextBox1.FocusedBackColor = System.Drawing.SystemColors.Window;
             this.exTextBox1.FocusedForeColor = System.Drawing.SystemColors.WindowText;
+            this.exTextBox1.Font = new System.Drawing.Font("Meiryo UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.exTextBox1.Location = new System.Drawing.Point(12, 12);
             this.exTextBox1.Name = "exTextBox1";
-            this.exTextBox1.Size = new System.Drawing.Size(100, 19);
+            this.exTextBox1.PlaceholderText = "テストプレースホルダー";
+            this.exTextBox1.Size = new System.Drawing.Size(100, 23);
             this.exTextBox1.TabIndex = 0;
             // 
             // exTextBox2

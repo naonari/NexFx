@@ -54,6 +54,29 @@ namespace NexFx.Controls
         [Description("フォーカス時の背景色を設定・取得します。")]
         public Color FocusedBackColor { get; set; } = SystemColors.Window;
 
+        private string _placeholderText = string.Empty;
+
+        /// <summary>
+        /// テキストが空の場合に表示する文字列を取得・設定します。
+        /// </summary>
+        [Browsable(true)]
+        [Category("表示")]
+        [DefaultValue("")]
+        [Description("テキストが空の場合に表示する文字列です。")]
+        [RefreshProperties(RefreshProperties.Repaint)]
+        public string PlaceholderText
+        {
+            get
+            {
+                return this._placeholderText;
+            }
+            set
+            {
+                this._placeholderText = value;
+                this.Invalidate();
+            }
+        }
+
         /// <summary>
         /// 拡張コントロールのサービス設定済みフラグを取得します。
         /// </summary>
@@ -71,6 +94,26 @@ namespace NexFx.Controls
 
             // 拡張コントロールのサービス設定済みフラグを設定します。
             this.DoneSetExControlService = true;
+        }
+
+        ///<summary>
+        ///描画拡張APIの処理を行います。
+        ///</summary>
+        ///<param name="m"></param>
+        protected override void WndProc(ref Message m)
+        {
+            const int WM_PAINT = 0x000F;
+            base.WndProc(ref m);
+            if (m.Msg == WM_PAINT && string.IsNullOrEmpty(this.Text) && string.IsNullOrEmpty(this.PlaceholderText) == false)
+            {
+                using (Graphics g = Graphics.FromHwnd(this.Handle))
+                {   //テキストボックス内の適切な座標に描画
+                    Rectangle rect = this.ClientRectangle;
+                    rect.Offset(1, 1);
+                    TextRenderer.DrawText(g, this.PlaceholderText, this.Font,
+                        rect, SystemColors.ControlDark, TextFormatFlags.Top | TextFormatFlags.Left);
+                }
+            }
         }
     }
 }
