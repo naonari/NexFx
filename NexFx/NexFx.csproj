@@ -95,6 +95,7 @@
     <Compile Include="Controls\IEXControlCore.cs" />
     <Compile Include="Controls\IEXControl.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\ExApplication.cs" />
     <Compile Include="Services\ExControlCoreService.cs" />
     <Compile Include="Services\ExControlService.cs" />
     <EmbeddedResource Include="Controls\ExForm.resx">
