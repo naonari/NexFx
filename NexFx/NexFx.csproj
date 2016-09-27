@@ -50,55 +50,56 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controls\ExButton.cs">
+    <Compile Include="Methods\Methods.cs" />
+    <Compile Include="Presentations\ExButton.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controls\ExCheckBox.cs">
+    <Compile Include="Presentations\ExCheckBox.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controls\ExComboBox.cs">
+    <Compile Include="Presentations\ExComboBox.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controls\ExFlowLayoutPanel.cs">
+    <Compile Include="Presentations\ExFlowLayoutPanel.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controls\ExForm.cs">
+    <Compile Include="Presentations\ExForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Controls\ExForm.Designer.cs">
+    <Compile Include="Presentations\ExForm.Designer.cs">
       <DependentUpon>ExForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\ExGroupBox.cs">
+    <Compile Include="Presentations\ExGroupBox.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controls\ExNumericUpDown.cs">
+    <Compile Include="Presentations\ExNumericUpDown.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controls\ExPanel.cs">
+    <Compile Include="Presentations\ExPanel.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controls\ExRadioButton.cs">
+    <Compile Include="Presentations\ExRadioButton.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controls\ExSplitContainer.cs">
+    <Compile Include="Presentations\ExSplitContainer.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controls\ExTabControl.cs">
+    <Compile Include="Presentations\ExTabControl.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controls\ExTableLayoutPanel.cs">
+    <Compile Include="Presentations\ExTableLayoutPanel.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controls\ExTextBox.cs">
+    <Compile Include="Presentations\ExTextBox.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controls\IEXControlCore.cs" />
-    <Compile Include="Controls\IEXControl.cs" />
+    <Compile Include="Presentations\IEXControlCore.cs" />
+    <Compile Include="Presentations\IEXControl.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\ExApplication.cs" />
+    <Compile Include="Presentations\ExApplication.cs" />
     <Compile Include="Services\ExControlCoreService.cs" />
     <Compile Include="Services\ExControlService.cs" />
-    <EmbeddedResource Include="Controls\ExForm.resx">
+    <EmbeddedResource Include="Presentations\ExForm.resx">
       <DependentUpon>ExForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">

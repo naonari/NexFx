@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace NexFxTest
 {
-    public partial class TestForm : NexFx.Controls.ExForm
+    public partial class TestForm : NexFx.Presentations.ExForm
     {
         public TestForm()
         {

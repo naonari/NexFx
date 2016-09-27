@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.exTextBox1 = new NexFx.Controls.ExTextBox();
-            this.exTextBox2 = new NexFx.Controls.ExTextBox();
-            this.exButton1 = new NexFx.Controls.ExButton();
+            this.exTextBox1 = new NexFx.Presentations.ExTextBox();
+            this.exTextBox2 = new NexFx.Presentations.ExTextBox();
+            this.exButton1 = new NexFx.Presentations.ExButton();
             this.SuspendLayout();
             // 
             // exTextBox1
@@ -86,8 +86,8 @@
 
         #endregion
 
-        private NexFx.Controls.ExTextBox exTextBox1;
-        private NexFx.Controls.ExTextBox exTextBox2;
-        private NexFx.Controls.ExButton exButton1;
+        private NexFx.Presentations.ExTextBox exTextBox1;
+        private NexFx.Presentations.ExTextBox exTextBox2;
+        private NexFx.Presentations.ExButton exButton1;
     }
 }

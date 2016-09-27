@@ -1,5 +1,5 @@
 ﻿using System.Windows.Forms;
-using NexFx.Controls;
+using NexFx.Presentations;
 
 namespace NexFx.Services
 {
@@ -7,8 +7,7 @@ namespace NexFx.Services
     /// 拡張コントロールコアのサービスを表します。
     /// </summary>
     /// <typeparam name="T">拡張コントロールの型。</typeparam>
-    internal class ExControlCoreService<T>
-        where T : Control, IExControlCore
+    internal class ExControlCoreService<T> where T : Control, IExControlCore
     {
         /// <summary>拡張コントロール。</summary>
         private T _control;
