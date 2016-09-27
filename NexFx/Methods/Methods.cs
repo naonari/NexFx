@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -162,6 +163,50 @@ namespace NexFx.ExMethods
             {
                 // 既定値を返します。
                 return defaultValue;
+            }
+        }
+    }
+
+    public static class ExDictionaryMethods
+    {
+        /// <summary>
+        /// 指定した値を持つキーを全て取得します。
+        /// </summary>
+        /// <typeparam name="TKey">キーの型。</typeparam>
+        /// <typeparam name="TValue">値の型。</typeparam>
+        /// <param name="dic">対象のディクショナリ。</param>
+        /// <param name="value">指定した値。</param>
+        /// <returns>指定した値を持つキーの列挙子を返します。</returns>
+        public static IEnumerable<TKey> MatchAllKey<TKey, TValue>(this Dictionary<TKey, TValue> dic, TValue value)
+        {
+            if (dic.Values.Contains(value))
+            {
+                return dic.Where(x => x.Value.Equals(value)).Select(x => x.Key);
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// 指定した値を持つキーを取得します。
+        /// </summary>
+        /// <typeparam name="TKey">キーの型。</typeparam>
+        /// <typeparam name="TValue">値の型。</typeparam>
+        /// <param name="dic">対象のディクショナリ。</param>
+        /// <param name="value">指定した値。</param>
+        /// <param name="defaultKey">キーが存在しない場合のデフォルト値。</param>
+        /// <returns>指定した値を持つキーを返します。</returns>
+        public static TKey FirstOrDefaultKey<TKey, TValue>(this Dictionary<TKey, TValue> dic, TValue value, TKey defaultKey = default(TKey))
+        {
+            if (dic.Values.Contains(value))
+            {
+                return dic.First(x => x.Value.Equals(value)).Key;
+            }
+            else
+            {
+                return defaultKey;
             }
         }
     }
